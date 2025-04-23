@@ -15,27 +15,34 @@ class _HomeViewBodyState extends State<HomeViewBody> {
   TextEditingController searchController = TextEditingController();
   @override
   Widget build(BuildContext context) {
-    return Column(
-      children: [
-        CustomTextFormField(
-          placeholder: 'Search',
-          controller: searchController,
-          onSubmitted: (value) {},
-          suffixIcon: IconButton(
-            onPressed: () {},
-            icon: const Icon(
-              Iconsax.search_normal,
-              color: kDarkBlackColor,
+    return Padding(
+      padding: const EdgeInsets.symmetric(
+        horizontal: 16,
+      ),
+      child: Column(
+        children: [
+          const SizedBox(height: 48),
+          CustomTextFormField(
+            placeholder: 'Search',
+            controller: searchController,
+            onSubmitted: (value) {},
+            suffixIcon: IconButton(
+              onPressed: () {},
+              icon: const Icon(
+                Iconsax.search_normal,
+                color: kDarkBlackColor,
+              ),
             ),
           ),
-        ),
-        BookItem(
-            imageUrl: 'https://marketplace.canva.com/EAFPHUaBrFc/1/0/1003w/canva-black-and-white-modern-alone-story-book-cover-QHBKwQnsgzs.jpg',
-            title: 'title',
-            author: 'author',
-            summary: 'summary',
-        )
-      ],
+          const SizedBox(height: 32),
+          BookItem(
+              imageUrl: 'https://marketplace.canva.com/EAFPHUaBrFc/1/0/1003w/canva-black-and-white-modern-alone-story-book-cover-QHBKwQnsgzs.jpg',
+              title: 'This is title for the book',
+              author: 'Author',
+              summary: 'This is summary about the book This is summary about the book',
+          )
+        ],
+      ),
     );
   }
 }

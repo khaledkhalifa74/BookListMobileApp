@@ -1,9 +1,22 @@
+import 'package:book_list_app/core/utils/colors.dart';
 import 'package:book_list_app/features/Home/presentation/views/home_view.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:google_fonts/google_fonts.dart';
 import 'core/utils/globals.dart' as globals;
 
-void main() {
+void main() async{
+  SystemChrome.setEnabledSystemUIMode(
+    SystemUiMode.manual,
+    overlays: [SystemUiOverlay.top],
+  );
+  SystemChrome.setSystemUIOverlayStyle(SystemUiOverlayStyle(
+    statusBarColor: Colors.white, // top status bar color
+    statusBarIconBrightness: Brightness.dark,// dark icons for white background
+    statusBarBrightness: Brightness.light, // for ios
+    systemNavigationBarIconBrightness: Brightness.dark,// dark icons
+  ));
   runApp(const MyApp());
 }
 
@@ -18,8 +31,15 @@ class MyApp extends StatelessWidget {
       splitScreenMode: true,
         builder: (context, child){
         return MaterialApp(
+          debugShowCheckedModeBanner: false,
           locale: Locale('en'),
           title: 'Book List',
+          theme: ThemeData(
+            colorScheme: const ColorScheme.light(primary: kDarkBlackColor),
+            useMaterial3: true,
+            textTheme: GoogleFonts.ibmPlexSansArabicTextTheme(),
+            primaryColor: kDarkBlackColor,
+          ),
           initialRoute: HomeView.id,
           navigatorKey: globals.navigatorKey,
           routes: {
