@@ -1,22 +1,24 @@
+import 'package:book_list_app/core/utils/api_service.dart';
 import 'package:book_list_app/core/utils/colors.dart';
 import 'package:book_list_app/features/Home/presentation/views/home_view.dart';
+import 'package:book_list_app/simple_bloc_observer.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'core/utils/globals.dart' as globals;
 
 void main() async{
-  SystemChrome.setEnabledSystemUIMode(
-    SystemUiMode.manual,
-    overlays: [SystemUiOverlay.top],
-  );
+  WidgetsFlutterBinding.ensureInitialized();
   SystemChrome.setSystemUIOverlayStyle(SystemUiOverlayStyle(
     statusBarColor: Colors.white, // top status bar color
     statusBarIconBrightness: Brightness.dark,// dark icons for white background
     statusBarBrightness: Brightness.light, // for ios
     systemNavigationBarIconBrightness: Brightness.dark,// dark icons
   ));
+  ApiService.init();
+  Bloc.observer = SimpleBlocObserver();
   runApp(const MyApp());
 }
 

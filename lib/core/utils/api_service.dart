@@ -1,14 +1,18 @@
 import 'package:dio/dio.dart';
 
 class ApiService{
-  final _baseUrl = 'https://gutendex.com/';
-  final Dio _dio;
+  static Dio dio = Dio();
+  static init() {
+    dio = Dio(
+      BaseOptions(
+        baseUrl: 'https://gutendex.com/',
+        receiveDataWhenStatusError: true,
+      ),
+    );
+  }
 
-  ApiService(this._dio);
-
-  Future<Map<String,dynamic>> get({required String endPoint})async{
-    var response = await _dio.get('$_baseUrl$endPoint');
-
-    return response.data;
+  static Future<dynamic> get({required String url})async{
+    var response = await dio.get(url);
+    return response;
   }
 }
