@@ -26,6 +26,7 @@ void main() async{
   Hive.registerAdapter(ResultsAdapter());
   Hive.registerAdapter(AuthorsAdapter());
   Hive.registerAdapter(FormatsAdapter());
+  var box = await Hive.openBox<Results>('resultsBox');
   Bloc.observer = SimpleBlocObserver();
   runApp(const MyApp());
 }
