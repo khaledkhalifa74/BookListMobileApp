@@ -1,4 +1,5 @@
 import 'package:book_list_app/core/utils/assets.dart';
+import 'package:book_list_app/core/utils/colors.dart';
 import 'package:book_list_app/core/utils/styles.dart';
 import 'package:book_list_app/core/widgets/custom_button.dart';
 import 'package:flutter/material.dart';
@@ -18,7 +19,11 @@ class NoItemsWidget extends StatelessWidget {
             height:
             MediaQuery.sizeOf(context).height * .18,
           ),
-          Image.asset(AssetsData.noBooks),
+          Image.asset(
+              AssetsData.noBooks,
+            height: 50,
+            width: 50,
+          ),
           const SizedBox(height: 24),
           Text(
             text,
@@ -44,8 +49,12 @@ class ErrorLoadingItem extends StatelessWidget {
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
-            Image.asset(AssetsData.noBooks),
-            SizedBox(height: 32),
+            Image.asset(
+                AssetsData.noBooks,
+              height: 50,
+              width: 50,
+            ),
+            SizedBox(height: 16),
             Text(
               textAlign: TextAlign.center,
               failedText,
@@ -61,6 +70,7 @@ class ErrorLoadingItem extends StatelessWidget {
               width: 150,
               height: 50,
               text: 'Retry',
+              textColor: kDarkBlackColor,
               itemCallBack: onTap,
             )
           ],
