@@ -1,5 +1,6 @@
 import 'package:book_list_app/core/utils/colors.dart';
 import 'package:book_list_app/core/widgets/custom_text_field.dart';
+import 'package:book_list_app/core/widgets/error_paging_items.dart';
 import 'package:book_list_app/features/Home/data/models/book_model/results.dart';
 import 'package:book_list_app/features/Home/presentation/manager/home_cubit/home_cubit.dart';
 import 'package:book_list_app/features/Home/presentation/manager/home_cubit/home_state.dart';
@@ -52,21 +53,18 @@ class _HomeViewBodyState extends State<HomeViewBody> {
                       homeCubit.booksPagingController,
                       builderDelegate: PagedChildBuilderDelegate<Results?>(
                         firstPageErrorIndicatorBuilder: (context) {
-                          return SizedBox();
-                          // return ErrorLoadingItem(
-                          //   onTap: () {
-                          //     ethpatatCubit.searchedProvesPagingController
-                          //         .refresh();
-                          //   },
-                          //   failedText: AppLocalizations.of(context)!
-                          //       .failedToLoadEthpatat,
-                          // );
+                          return ErrorLoadingItem(
+                            onTap: () {
+                              homeCubit.booksPagingController
+                                  .refresh();
+                            },
+                            failedText: 'Failed to load books',
+                          );
                         },
                         noItemsFoundIndicatorBuilder: (context) {
-                          return SizedBox();
-                          // return NoItemsWidget(
-                          //   text: AppLocalizations.of(context)!.noProves,
-                          // );
+                          return NoItemsWidget(
+                            text: 'There are no books',
+                          );
                         },
                         itemBuilder: (context, item, index) {
                           return Padding(

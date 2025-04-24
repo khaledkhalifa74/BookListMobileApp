@@ -41,7 +41,7 @@ class HomeCubit extends Cubit<HomeState> {
     }
   }
 
-  Future<void> booksInitializeState() async {
+  Future<void> fetchBooksInitialize() async {
     booksPagingController.addPageRequestListener((pageKey) {
       fetchBooks(pageKey);
     });

@@ -5,4 +5,6 @@ const kWhiteColor = Colors.white;
 const kErrorColor = Colors.red;
 const kBorderColor = Color(0xffE6E7EC);
 const kHintColor = Color(0xff828282);
+const kDisablesButtonColor = Color(0xffb1b2cb);
+
 

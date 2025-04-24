@@ -9,7 +9,7 @@ class HomeView extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return BlocProvider(
-      create: (context) => HomeCubit()..booksInitializeState(),
+      create: (context) => HomeCubit()..fetchBooksInitialize(),
       child: Scaffold(
         body: HomeViewBody(),
       ),
