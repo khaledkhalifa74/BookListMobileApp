@@ -10,7 +10,6 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:iconsax/iconsax.dart';
 import 'package:infinite_scroll_pagination/infinite_scroll_pagination.dart';
-import 'package:shimmer/shimmer.dart';
 
 class HomeViewBody extends StatefulWidget {
   const HomeViewBody({super.key});
@@ -50,66 +49,52 @@ class _HomeViewBodyState extends State<HomeViewBody> {
                   ),
                 ),
                 Expanded(
-                  child: ListView.builder(
-                    physics: NeverScrollableScrollPhysics(),
-                    itemCount: homeCubit.booksPagingController.itemList?.length,
-                    itemBuilder: (context, index){
-                      return Padding(
-                        padding: const EdgeInsets.symmetric(vertical: 8.0),
-                        child: BooksShimmer(),
-                      );
-                    },
-                  ),
-                )
-                // Expanded(
-                //     child: PagedListView<int, Results?>(
-                //       pagingController:
-                //       homeCubit.booksPagingController,
-                //       builderDelegate: PagedChildBuilderDelegate<Results?>(
-                //         firstPageProgressIndicatorBuilder: (context){
-                //           return ListView.builder(
-                //             physics: NeverScrollableScrollPhysics(),
-                //               itemCount: homeCubit.booksPagingController.itemList?.length,
-                //               itemBuilder: (context, index){
-                //                 return Padding(
-                //                   padding: const EdgeInsets.symmetric(vertical: 8.0),
-                //                   child: BooksShimmer(),
-                //                 );
-                //               },
-                //           );
-                //         },
-                //         firstPageErrorIndicatorBuilder: (context) {
-                //           return Center(
-                //             child: ErrorLoadingItem(
-                //               onTap: () {
-                //                 homeCubit.booksPagingController
-                //                     .refresh();
-                //               },
-                //               failedText: 'Failed to load books',
-                //             ),
-                //           );
-                //         },
-                //         noItemsFoundIndicatorBuilder: (context) {
-                //           return Center(
-                //             child: NoItemsWidget(
-                //               text: 'There are no books',
-                //             ),
-                //           );
-                //         },
-                //         itemBuilder: (context, item, index) {
-                //           return Padding(
-                //             padding: const EdgeInsets.symmetric(vertical: 8.0),
-                //             child: BookItem(
-                //                 title: item!.title!,
-                //                 imageUrl: item.formats!.imageJpeg!,
-                //                 author: item.authors![0].name!,
-                //                 summary: item.summaries![0].toString(),
-                //                ),
-                //           );
-                //         },
-                //       ),
-                //     ),
-                // ),
+                    child: PagedListView<int, Results?>(
+                      pagingController:
+                      homeCubit.booksPagingController,
+                      builderDelegate: PagedChildBuilderDelegate<Results?>(
+                        firstPageProgressIndicatorBuilder: (context){
+                          return Column(
+                            children: List.generate(10, (index) {
+                              return const Padding(
+                                padding: EdgeInsets.symmetric(vertical: 8.0),
+                                child: BooksShimmer(),
+                              );
+                            }),
+                          );
+                        },
+                        firstPageErrorIndicatorBuilder: (context) {
+                          return Center(
+                            child: ErrorLoadingItem(
+                              onTap: () {
+                                homeCubit.booksPagingController
+                                    .refresh();
+                              },
+                              failedText: 'Failed to load books',
+                            ),
+                          );
+                        },
+                        noItemsFoundIndicatorBuilder: (context) {
+                          return Center(
+                            child: NoItemsWidget(
+                              text: 'There are no books',
+                            ),
+                          );
+                        },
+                        itemBuilder: (context, item, index) {
+                          return Padding(
+                            padding: const EdgeInsets.symmetric(vertical: 8.0),
+                            child: BookItem(
+                                title: item!.title!,
+                                imageUrl: item.formats!.imageJpeg!,
+                                author: item.authors![0].name!,
+                                summary: item.summaries![0].toString(),
+                               ),
+                          );
+                        },
+                      ),
+                    ),
+                ),
               ],
             ),
           ),
