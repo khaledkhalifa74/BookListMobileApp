@@ -78,7 +78,9 @@ class _BookItemState extends State<BookItem> {
                         isExpanded
                             ? 'See Less'
                             : 'See More',
-                      style: Styles.textStyle14,
+                      style: Styles.textStyle14.copyWith(
+                        fontWeight: FontWeight.bold,
+                      ),
                     ),
                   ),
               ],
