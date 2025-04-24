@@ -37,7 +37,7 @@ class _HomeViewBodyState extends State<HomeViewBody> {
               children: [
                 const SizedBox(height: 48),
                 CustomTextFormField(
-                  placeholder: 'Search',
+                  placeholder: 'Explore the world of books..',
                   controller: searchController,
                   onSubmitted: (value) {
                     homeCubit.updateSearchQuery(value);
