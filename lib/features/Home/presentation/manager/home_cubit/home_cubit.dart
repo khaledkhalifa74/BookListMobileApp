@@ -16,10 +16,19 @@ class HomeCubit extends Cubit<HomeState> {
   static int pageSize = 32;
   BookModel? bookModelResponse;
   final PagingController<int, Results?> booksPagingController = PagingController(firstPageKey: 1);
+
+  String? searchQuery;
+  void updateSearchQuery(String query) {
+    searchQuery = query.trim().isEmpty ? null : query.trim();
+    booksPagingController.refresh();
+  }
   Future<Either<Failure, BookModel>> fetchBooks(int pageKey) async {
     try {
       emit(StartLoadingFetchBooks());
-      final response = await ApiService.get(url: 'books/?page=$pageKey');
+      final String endpoint = searchQuery != null
+          ? 'books/?search=${Uri.encodeComponent(searchQuery!)}&page=$pageKey'
+          : 'books/?page=$pageKey';
+      final response = await ApiService.get(url: endpoint);
       bookModelResponse = BookModel.fromJson(response.data);
         if (bookModelResponse!.results!.isNotEmpty) {
           if (bookModelResponse!.next == null) {

@@ -39,15 +39,20 @@ class _HomeViewBodyState extends State<HomeViewBody> {
                 CustomTextFormField(
                   placeholder: 'Search',
                   controller: searchController,
-                  onSubmitted: (value) {},
+                  onSubmitted: (value) {
+                    homeCubit.updateSearchQuery(value);
+                  },
                   suffixIcon: IconButton(
-                    onPressed: () {},
+                    onPressed: () {
+                      homeCubit.updateSearchQuery(searchController.text);
+                    },
                     icon: const Icon(
                       Iconsax.search_normal,
                       color: kDarkBlackColor,
                     ),
                   ),
                 ),
+                const SizedBox(height: 8),
                 Expanded(
                     child: PagedListView<int, Results?>(
                       pagingController:
@@ -87,8 +92,12 @@ class _HomeViewBodyState extends State<HomeViewBody> {
                             child: BookItem(
                                 title: item!.title!,
                                 imageUrl: item.formats!.imageJpeg!,
-                                author: item.authors![0].name!,
-                                summary: item.summaries![0].toString(),
+                                author: (item.authors?.isNotEmpty ?? false)
+                                    ? item.authors![0].name.toString()
+                                    : 'No authors available',
+                                summary: (item.summaries?.isNotEmpty ?? false)
+                                    ? item.summaries![0].toString()
+                                    : 'No summary available',
                                ),
                           );
                         },
