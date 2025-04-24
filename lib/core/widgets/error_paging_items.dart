@@ -17,17 +17,25 @@ class NoItemsWidget extends StatelessWidget {
         children: [
           SizedBox(
             height:
-            MediaQuery.sizeOf(context).height * .18,
+            MediaQuery.sizeOf(context).height * .2,
           ),
           Image.asset(
               AssetsData.noBooks,
-            height: 50,
-            width: 50,
+            height: 80,
+            width: 80,
           ),
           const SizedBox(height: 24),
           Text(
             text,
             style: Styles.textStyle20,
+          ),
+          const SizedBox(height: 4),
+          Text(
+            'Try adjusting your search or check back later.',
+            style: Styles.textStyle14.copyWith(
+              color: Colors.grey[600],
+            ),
+            textAlign: TextAlign.center,
           ),
         ],
       ),
@@ -49,10 +57,14 @@ class ErrorLoadingItem extends StatelessWidget {
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
+            SizedBox(
+              height:
+              MediaQuery.sizeOf(context).height * .18,
+            ),
             Image.asset(
                 AssetsData.noBooks,
-              height: 50,
-              width: 50,
+              height: 80,
+              width: 80,
             ),
             SizedBox(height: 16),
             Text(

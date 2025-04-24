@@ -82,7 +82,7 @@ class _HomeViewBodyState extends State<HomeViewBody> {
                         noItemsFoundIndicatorBuilder: (context) {
                           return Center(
                             child: NoItemsWidget(
-                              text: 'There are no books',
+                              text: 'No books match your search',
                             ),
                           );
                         },
